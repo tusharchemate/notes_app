@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
-const AddNotes = ({handleAddNote}) => {
+const AddNotes = ({ handleAddNote }) => {
   const [noteText, setNoteText] = useState('');
-  const characterLimit =200;
+  const characterLimit = 200;
   const handleChange = (event) => {
-    setNoteText(event.target.value);
+    if (characterLimit - event.target.value.length >= 0)
+      setNoteText(event.target.value);
   };
 
-  const handleSaveClick =()=> {
-    if(noteText.trim().length >0)
-    handleAddNote(noteText);
-  }
+  const handleSaveClick = () => {
+    if (noteText.trim().length > 0) handleAddNote(noteText);
+  };
 
   return (
     <div className="note new">
@@ -24,7 +24,9 @@ const AddNotes = ({handleAddNote}) => {
 
       <div className="note-footer">
         <small>{characterLimit - noteText.length} Remaining</small>
-        <button onClick={handleSaveClick} className="save">Save</button>
+        <button onClick={handleSaveClick} className="save">
+          Save
+        </button>
       </div>
     </div>
   );
